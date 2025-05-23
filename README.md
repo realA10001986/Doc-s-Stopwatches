@@ -78,7 +78,7 @@ Settings in Arduino IDE:
 - Variant: 328PB
 - Bootloader: No bootloader
 
-Fresh boards first need their fuses set correctly. In order to do that, you need to call "Burn bootloader" from the "Tools" menu once (yes, despite no bootloader to be installed). This needs to be done in slow mode: In case of the USBasp, set "Programmer" -> "USBasp slow" in the "Tools" menu for that initial step. Updating the firmare can later be done in normal mode ("Programmer" -> "USBasp").
+Fresh boards first need their fuses set correctly. In order to do that, you need to call "Burn bootloader" from the "Tools" menu once (yes, despite no bootloader to be installed). This needs to be done in slow mode: In case of the USBasp, set "Programmer" -> "USBasp slow" in the "Tools" menu for that initial step. Updating the firmware can later be done in normal mode ("Programmer" -> "USBasp").
 
 
 
