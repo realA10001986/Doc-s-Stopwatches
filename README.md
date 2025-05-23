@@ -72,7 +72,7 @@ The firmware requires the "Minicore" package.
 Settings in Arduino IDE:
 - Board type: Minicore / ATmega328
 - Clock: Internal 8Mhz
-- BOD: 1.8V or disabled - does not matter when powered through rechargable Lithium batteries)
+- BOD: 1.8V or disabled - does not matter when powered through rechargeable Lithium batteries)
 - EEPROM retained
 - Compiler LTO: Enabled
 - Variant: 328PB
