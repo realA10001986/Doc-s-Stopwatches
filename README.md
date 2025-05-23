@@ -1,6 +1,6 @@
 # Doc's Stopwatches
 
-This repository holds the firmware for movie-adapted Citizen(tm) or Seiko(tm) stopwatches, as used by Doc Emmett Brown in the vey first scene introducing time travel.
+This repository holds the firmware for movie-adapted Citizen(tm) or Seiko(tm) stopwatches, as used by Doc Emmett Brown in the very first scene introducing time travel.
 
 ## Instructions
 
