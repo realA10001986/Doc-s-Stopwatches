@@ -3,7 +3,7 @@ There are two PCBs: Seiko and Citizen. They are identical feature-wise, the only
 
 ![Seiko](../img/schematics_seiko.jpg)
 
-![Citizen](../img/schematics_citizen.jpg)
+![Citizen](../img/schematics_citi.jpg)
 
 Power supply: 3V. Rechargable CR123A battery recommended. One charge lasts about 5 hours, depending on use. 
 
