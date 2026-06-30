@@ -7,7 +7,7 @@ Buttons 1 and 2 need to be momentary contacts; on/off requires a maintained cont
 
 ![Citizen](../img/schematics_citi.jpg)
 
-The display is a 0.4" 4-digit LED Display, red, clock style (colon in center), common cathode. It is soldered directly onto the PCB.
+The display is a 0.4" 4-digit LED Display, red, clock style (colon in center), common cathode. It is soldered directly onto the PCB's back side.
 
 ![Tube](../img/tube.png)
 
