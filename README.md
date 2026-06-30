@@ -2,7 +2,7 @@
 
 This repository holds the electronics production files and the firmware for movie-adapted Citizen(tm) or Seiko(tm) stopwatches (or replicas thereof), as used by Doc Emmett Brown in the very first scene introducing time travel.
 
-At some point, complete replicas might become available [here](https://movieprops.blog/shop/). You can, however, make your own eletronics using the files in the Eletronics folder.
+At some point, complete replicas might become available [here](https://movieprops.blog/shop/). You can, however, make your own electronics using the files in the Electronics folder, and use those to build your own replica.
 
 ## Instructions
 
