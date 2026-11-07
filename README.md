@@ -94,6 +94,8 @@ The modification of a Seiko is more or less trivial. The microswitches used are 
 
 This is a prototype. I am sure folks with a 3D printer can make the electronics sit in a more refined way. 
 
-The batteries are in the printer battery compartment. I used the red and black wires of the printer cable for power. Since the device only needs 3V, I bridged the third battery space with a wire. The printer PCB modifications are simple: The + side from the battery goes through the on/off switch, and the - side directly to the black wire of the cable connector. This way, you can switch on/off the watch through the on/off switch of the printer.
+The batteries are in the printer battery compartment. I used the red and black wires of the printer cable for power. Since the device only needs 3V, I bridged the third battery space with a wire. The printer PCB modifications are simple: The + side from the battery goes through the on/off switch and then to the red wire of the cable connector, and the - side directly to the black wire of the cable connector. This way, you can switch on/off the watch through the on/off switch of the printer.
+
+I have not tried to modify a Citizen watch, never came by one.
 
 
