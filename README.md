@@ -4,8 +4,6 @@
 
 ![seiko2](img/seiko1.jpg)
 
-![seiko3](img/seiko3.jpg)
-
 This repository holds the electronics production files and the firmware for movie-adapted Citizen(tm) or Seiko(tm) stopwatches (or replicas thereof), as used by Doc Emmett Brown in the very first scene introducing time travel.
 
 At some point, complete replicas might become available [here](https://movieprops.blog/shop/). You can, however, make your own electronics using the files in the Electronics folder, and use those to build your own replica. Both the hardware and the software are production-ready.
@@ -91,5 +89,11 @@ Fresh boards first need their fuses set correctly. In order to do that, you need
 ## Hardware
 
 The modification of a Seiko is more or less trivial. The photo above tells it all. The microswitches used are Saia-Burgess F4T7Y1-UL.
+
+![seiko3](img/seiko3.jpg)
+
+This is a prototype. I am sure folks with a 3D printer can make the electronics sit in a more refined way. 
+
+The batteries are in the printer battery compartment. I used the red and black wires of the printer cable for power. Since the device only needs 3V, I bridged the third battery space with a wire. The printer PCB modifications are simple: The + side from the battery goes through the on/off switch, and the - side directly to the black wire of the cable connector. This way, you can switch on/off the watch through the on/off switch of the printer.
 
 
