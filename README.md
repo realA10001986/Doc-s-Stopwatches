@@ -77,10 +77,6 @@ In order to update the firmware, you need an ISP programmer, for instance an USB
 
 The firmware requires the "Minicore" package.
 
-## Hardware
-
-The modification of a Seiko is more or less trivial. The photo above tells it all. The microswitches used are XXXX.
-
 Settings in Arduino IDE:
 - Board type: Minicore / ATmega328
 - Clock: Internal 8Mhz
@@ -92,5 +88,8 @@ Settings in Arduino IDE:
 
 Fresh boards first need their fuses set correctly. In order to do that, you need to call "Burn bootloader" from the "Tools" menu once (yes, despite no bootloader to be installed). This needs to be done in slow mode: In case of the USBasp, set "Programmer" -> "USBasp slow" in the "Tools" menu for that initial step. Updating the firmware can later be done in normal mode ("Programmer" -> "USBasp").
 
+## Hardware
+
+The modification of a Seiko is more or less trivial. The photo above tells it all. The microswitches used are Saia-Burgess F4T7Y1-UL.
 
 
