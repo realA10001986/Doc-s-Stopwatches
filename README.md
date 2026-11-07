@@ -4,6 +4,8 @@
 
 ![seiko2](img/seiko1.jpg)
 
+![seiko3](img/seiko3.jpg)
+
 This repository holds the electronics production files and the firmware for movie-adapted Citizen(tm) or Seiko(tm) stopwatches (or replicas thereof), as used by Doc Emmett Brown in the very first scene introducing time travel.
 
 At some point, complete replicas might become available [here](https://movieprops.blog/shop/). You can, however, make your own electronics using the files in the Electronics folder, and use those to build your own replica. Both the hardware and the software are production-ready.
@@ -74,6 +76,10 @@ Holding button 2 saves the chosen value and exits Settings. Holding button 1 exi
 In order to update the firmware, you need an ISP programmer, for instance an USBasp. The programmer must be set to 3.3V.
 
 The firmware requires the "Minicore" package.
+
+## Hardware
+
+The modification of a Seiko is more or less trivial. The photo above tells it all. The microswitches used are XXXX.
 
 Settings in Arduino IDE:
 - Board type: Minicore / ATmega328
