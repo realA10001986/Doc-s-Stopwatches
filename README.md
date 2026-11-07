@@ -88,7 +88,7 @@ Fresh boards first need their fuses set correctly. In order to do that, you need
 
 ## Hardware
 
-The modification of a Seiko is more or less trivial. The photo above tells it all. The microswitches used are Saia-Burgess F4T7Y1-UL.
+The modification of a Seiko is more or less trivial. The microswitches used are Saia-Burgess F4T7Y1-UL.
 
 ![seiko3](img/seiko3.jpg)
 
