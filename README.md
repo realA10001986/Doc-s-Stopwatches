@@ -69,7 +69,7 @@ In order to save power, the watch supports a screen saver in Movie Mode. The Scr
 
 Holding button 2 saves the chosen value and exits Settings. Holding button 1 exits Settings without saving the Screen Saver setup.
 
-## Firmware update
+## Firmware installation
 
 In order to update the firmware, you need an ISP programmer, for instance an USBasp. The programmer must be set to 3.3V.
 
@@ -85,6 +85,8 @@ Settings in Arduino IDE:
 - Bootloader: No bootloader
 
 Fresh boards first need their fuses set correctly. In order to do that, you need to call "Burn bootloader" from the "Tools" menu once (yes, despite no bootloader to be installed). This needs to be done in slow mode: In case of the USBasp, set "Programmer" -> "USBasp slow" in the "Tools" menu for that initial step. Updating the firmware can later be done in normal mode ("Programmer" -> "USBasp").
+
+Note: The modified Seiko shown on the pictures requires ```#define LEFT_DGT_COVERED``` (line 83 of the ino file) to be __uncommented__. A replica where the window is wide enough to fully fit all four digits needs this line to be __commented__.
 
 ## Mod of Original
 
