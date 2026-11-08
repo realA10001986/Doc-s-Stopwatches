@@ -1,13 +1,14 @@
 /*
  * -------------------------------------------------------------------
  * BTTF Stopwatch
- * (C) 2024-2025 Thomas Winischhofer (A10001986)
+ * (C) 2024-2026 Thomas Winischhofer (A10001986)
  * https://github.com/realA10001986/Stopwatch
  */
 
  /*
   * Holding Button 1 selects the mode of operation:
   * - Movie mode: Pressing button 2 advances, holding resets
+  *               Pressing button 1 disables screen saver when active
   * - Stop Watch: Like original
   * - Counter: Pressing button 2 increases counter, pressing button 1
   *   resets it.
@@ -15,6 +16,9 @@
   *   pressing button 2 increases hours/minutes, pressing button 1
   *   increases minutes by 10.
   * 
+  * 2026/11/07 (1.07)
+  * - Fix stopwatch for when left-most digit is covered (leading 0 removed)
+  * - Add compile-time switch for buttons that are active low
   * 2024/12/10 (1.06)
   * - Add screen saver for Movie Mode. After 20 mins without user interaction,
   *   the display will be switched off in order to save power.
@@ -74,14 +78,17 @@
 
 #include "input.h"
 
-static const char *fwv = "1.06";   // do not change pattern!
+// Comment this if the left-most digit is fully visible
+// Uncomment if partly covered so that only "1" can be displayed
+#define LEFT_DGT_COVERED
+
+// Comment this is the buttons close when being pressed
+// Uncomment if buttons open when pressed
+//#define BUTTONS_INVERT
+
+static const char *fwv = "1.07";   // do not change pattern!
 
 //#define FONT_PROTO        // Use prototype segment routing
-
-#define LEFT_MOST  59     // if left-most digit is fully usable
-#define LEFT_MOSTH 99     // if left-most digit is fully usable
-//#define LEFT_MOST 19    // if left-most digit is cut off: Can only show "1" there
-//#define LEFT_MOSTH 19   // if left-most digit is cut off: Can only show "1" there
 
 #define BTTF_HOUR       1
 #define BTTF_START_MIN 18
@@ -92,6 +99,14 @@ static const char *fwv = "1.06";   // do not change pattern!
 
 #define MIL_MIN       980
 #define MIL_MAX      1020
+
+#ifndef LEFT_DGT_COVERED
+#define LEFT_MOST  59   // if left-most digit is fully usable
+#define LEFT_MOSTH 99   // if left-most digit is fully usable
+#else
+#define LEFT_MOST 19    // if left-most digit is cut off: Can only show "1" there
+#define LEFT_MOSTH 19   // if left-most digit is cut off: Can only show "1" there
+#endif
 
 // 7 seg font
 #ifdef FONT_PROTO // Board < 10
@@ -114,7 +129,7 @@ static const char *fwv = "1.06";   // do not change pattern!
 #define S7G_DOT 0b00100000    // DX dot
 #endif
 
-static const uint8_t font7seg[38] = {
+static const uint8_t font7seg[39] = {
     S7G_T|S7G_TR|S7G_BR|S7G_B|S7G_BL|S7G_TL,        // 0
     S7G_TR|S7G_BR,                                  // 1
     S7G_T|S7G_TR|S7G_B|S7G_BL|S7G_M,                // 2
@@ -152,7 +167,8 @@ static const uint8_t font7seg[38] = {
     S7G_TR|S7G_BR|S7G_B|S7G_TL|S7G_M,
     S7G_T|S7G_TR|S7G_B|S7G_BL|S7G_M,                // Z
     S7G_DOT,
-    S7G_M
+    S7G_M,
+    0
 };
 
 static const int div10[100] = {
@@ -211,7 +227,12 @@ static unsigned long dot_duration = mMovieDotOffDur;
 // Stop watch
 static bool          swRunning = false, lap = false, swEndReached = false;
 static unsigned long SWStart = 0, elapsed = 0;
-static int           oDig1 = 0, oDig2 = 0, oDig3 = 0, oDig4 = 0;
+#ifdef LEFT_DGT_COVERED
+#define DEF_ODIG1 39
+#else
+#define DEF_ODIG1 0
+#endif
+static int           oDig1 = DEF_ODIG1, oDig2 = 0, oDig3 = 0, oDig4 = 0;
 static uint8_t       oDp2 = 0, oColon = 0, oDp4 = 0;
 
 // Counter mode
@@ -247,12 +268,20 @@ static unsigned long ssTimer = 0;
 #define SS_TIMEOUT    (60*20)    // Screen-saver timeout (seconds)
 
 static SWButton button = SWButton(BUTTON1_PIN,
+#ifdef BUTTONS_INVERT
+    false,   // Button is active HIGH
+#else
     true,    // Button is active LOW
+#endif
     true     // Enable internal pull-up resistor
 );
 
 static SWButton button2 = SWButton(BUTTON2_PIN,
+#ifdef BUTTONS_INVERT
+    false,   // Button is active HIGH
+#else
     true,    // Button is active LOW
+#endif
     true     // Enable internal pull-up resistor
 );
 
@@ -576,7 +605,11 @@ void loop()
                 dig4 = mod10[swt_f];          //   . 1
                 dig3 = div10[swt_f];          //   .1
                 dig2 = mod10[swt_secs];       //  1.
+                #ifdef LEFT_DGT_COVERED
+                dig1 = div10[swt_secs] ? div10[swt_secs] : 39;
+                #else
                 dig1 = div10[swt_secs];       // 1 .
+                #endif
                 dp2 = S7G_DOT;
             } else if(swt_secs <= ((LEFT_MOSTH*60UL)+59)) { // <= x9:59: mins:seconds
                 unsigned long swt_s = swt_secs % 60;
@@ -584,7 +617,11 @@ void loop()
                 dig4 = mod10[swt_s];          //   : 1
                 dig3 = div10[swt_s];          //   :1
                 dig2 = mod10[swt_secs];       //  1:
+                #ifdef LEFT_DGT_COVERED
+                dig1 = div10[swt_secs] ? div10[swt_secs] : 39;
+                #else
                 dig1 = div10[swt_secs];       // 1 :
+                #endif
                 colon = S7G_DOT;
             /*
             } else if(swt_secs <= LEFT_MOSTH*60*60UL) {     // <= x9:59 hrs:mins
@@ -627,7 +664,11 @@ void loop()
         } else if(isButton2Pressed) {   // increase
             isButton2Pressed = false;
             counter++;
+            #ifdef LEFT_DGT_COVERED
+            if(counter > 1999) counter = 0;
+            #else
             if(counter > 9999) counter = 0;
+            #endif
         }
 
         if(forceDisplay || counter != oldCounter) {
@@ -851,7 +892,12 @@ static void onlyShowMins(int m)
 
 static void resetSW()
 {
+    #ifdef LEFT_DGT_COVERED
+    oDig1 = 39;
+    oDig2 = oDig3 = oDig4 = 0;
+    #else
     oDig1 = oDig2 = oDig3 = oDig4 = 0;
+    #endif
     oColon = oDp4 = 0;
     oDp2 = S7G_DOT; 
     elapsed = 0;

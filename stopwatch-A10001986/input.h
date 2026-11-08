@@ -1,7 +1,7 @@
 /*
  * -------------------------------------------------------------------
  * BTTF Stopwatch
- * (C) 2024-2025 Thomas Winischhofer (A10001986)
+ * (C) 2024-2026 Thomas Winischhofer (A10001986)
  * https://github.com/realA10001986/Stopwatch
  */
 
@@ -11,7 +11,6 @@
 /*
  * SWButton class
  */
-
 
 typedef enum {
     SWBS_IDLE,
